@@ -39,7 +39,7 @@
 
                                 alert(numer);
 
-                        // fetch(`http://10.206.193.4/api/wsapi.php?action=MakeCall&token=ew3QcS3Zq3&channel=SIP/TRUNK-ISABEL/\${numer}&ext=3014&contexto=aware_cola`)
+                        // fetch(`http://10.206.193.4/api/wsapi.php?action=MakeCall&token=PORCONFIRMAR&channel=SIP/TRUNK-ISABEL/\${numer}&ext=3014&contexto=aware_cola`)
 
                         }
                         setInterval(numAbandono, 1000);
