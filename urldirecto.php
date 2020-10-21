@@ -14,6 +14,19 @@
                 <?php
                 $fech = date("Y-m-d");
 
+                // NÚMERO EN LA LISTA
+                include "conexion.php";
+
+                $result = pg_query($conexion, "SELECT * FROM vista_abandono_inbound WHERE cola='3014' AND fecha='$fech' ORDER BY callid ASC LIMIT 1");
+                while ($consulta = pg_fetch_array($result)) {
+                    $fono = $consulta[4];
+
+                }
+                    echo $fono;
+                    echo "</br>";
+                include "cerrar.php";
+
+
                 // AGENTE LIBRE
                 include "conexion.php";
                 $result = pg_query($conexion, "SELECT * FROM empleado_proyecto ep
@@ -27,23 +40,11 @@
                     if(strlen($rutAg) > 0){
 
                         echo "<script>
-                        
-                        // NÚMERO EN LA LISTA
-                        function numAbandono()
-                        {
-                            var numer = $.ajax({
-                                url:'numero_abandono.php',
-                                dataType:'text',
-                                async:false
-                                }).responseText;
 
-                                alert(numer);
+                            var numer = 3103603125;
 
                         // fetch(`http://10.206.193.4/api/wsapi.php?action=MakeCall&token=ew3QcS3Zq3&channel=SIP/TRUNK-ISABEL/\${numer}&ext=3014&contexto=aware_cola`)
-
-                        }
-                        setInterval(numAbandono, 1000);
-
+        
                         </script>";
                     }
 
