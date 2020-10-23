@@ -11,24 +11,19 @@
         <small><?php echo date('Y-m-d | H:i:s'); ?></small>
         <div class="row">
             <div class="col-md-12">
-                <?php
-                $fech = date("Y-m-d");
+                <script>
 
-                // AGENTE LIBRE
-                include "conexion.php";
-                $result = pg_query($conexion, "SELECT * FROM empleado_proyecto ep
-                INNER JOIN agent_status ag
-                ON ep.empleado_rut = ag.agente_id
-                WHERE ep.proyecto_id = '14' AND ag.status = 'IDLE'");
-                while ($consulta = pg_fetch_array($result)) {
-                    $rutAg = $consulta['empleado_rut'];
+                function agentLibre(){
+                    var tablad = $.ajax({
+                        url:'agente_libre.php',
+                        dataType:'text',
+                        async:false
+                        }).responseText;
+
+                    document.getElementById("agen").innerHTML = tablad;
                 }
-                    //Si hay un agente libre se carga la url con el número del abandono.
-                    if(strlen($rutAg) > 0){
+                setInterval(agentLibre, 1000);
 
-                        echo "<script>
-                        
-                        // NÚMERO EN LA LISTA
                         function numAbandono()
                         {
                             var numer = $.ajax({
@@ -37,21 +32,24 @@
                                 async:false
                                 }).responseText;
 
-                                alert(numer);
-
-                        // fetch(`http://10.206.193.4/api/wsapi.php?action=MakeCall&token=PORCONFIRMAR&channel=SIP/TRUNK-ISABEL/\${numer}&ext=3014&contexto=aware_cola`)
-
+                            document.getElementById("num").innerHTML = numer;
                         }
                         setInterval(numAbandono, 1000);
 
-                        </script>";
-                    }
+                        // fetch(`http://10.206.193.4/api/wsapi.php?action=MakeCall&token=sdfasdfgsdfgsd&channel=SIP/TRUNK-ISABEL/\${numer}&ext=3014&contexto=aware_cola`)
 
-                    echo $rutAg;
-                include "cerrar.php";
-                ?>
+                </script>
+
             </div>
             <div class="col-md-12">
+            </br><section>
+                <p>Primer registro en abandono:</p>
+                <b><p id="num"></p></b>
+            </section>
+            <section>
+                <p>Agente Disponible:</p>
+                <b><p style="color:red;" id="agen"></p></b>
+            </section>
             </div>
         </div>
     </div>
