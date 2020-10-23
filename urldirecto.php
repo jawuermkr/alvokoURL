@@ -1,3 +1,8 @@
+<?php
+    $self = 60;
+    header("refresh:" . $self);
+?>
+
 <html>
     <head>
         <title>Contador</title>
@@ -14,19 +19,6 @@
                 <?php
                 $fech = date("Y-m-d");
 
-                // NÚMERO EN LA LISTA
-                include "conexion.php";
-
-                $result = pg_query($conexion, "SELECT * FROM vista_abandono_inbound WHERE cola='3014' AND fecha='$fech' ORDER BY callid ASC LIMIT 1");
-                while ($consulta = pg_fetch_array($result)) {
-                    $fono = $consulta[4];
-
-                }
-                    echo $fono;
-                    echo "</br>";
-                include "cerrar.php";
-
-
                 // AGENTE LIBRE
                 include "conexion.php";
                 $result = pg_query($conexion, "SELECT * FROM empleado_proyecto ep
@@ -41,18 +33,34 @@
 
                         echo "<script>
 
-                            var numer = 3103603125;
+                        function numAbandono(){
+                            var numer = $.ajax({
+                                url:'numero_abandono.php',
+                                dataType:'text',
+                                async:false
+                                }).responseText;
 
-                        // fetch(`http://10.206.193.4/api/wsapi.php?action=MakeCall&token=PORCONFIRMAR&channel=SIP/TRUNK-ISABEL/\${numer}&ext=3014&contexto=aware_cola`)
+                            alert(numer);
+                            document.getElementById(\"num\").innerHTML = numer;
+                        }
+                        setTimeout(numAbandono, 1000);
+
+                        // fetch(`http://10.206.193.4/api/wsapi.php?action=MakeCall&token=asdgasdgaerg&channel=SIP/TRUNK-ISABEL/\${numer}&ext=3014&contexto=aware_cola`)
         
                         </script>";
                     }
-
-                    echo $rutAg;
                 include "cerrar.php";
                 ?>
             </div>
             <div class="col-md-12">
+                </br><section>
+                    <p>Primer registro en abandono:</p>
+                    <b><p id="num"></p></b>
+                </section>
+                <section>
+                    <p>Agente Disponible:</p>
+                    <b><p style="color:red;"><?php echo $rutAg; ?></p></b>
+                </section>
             </div>
         </div>
     </div>
