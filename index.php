@@ -46,7 +46,7 @@
                         setTimeout(numAbandono, 1000);
 
                         if(numer > 0){
-                        // fetch(`http://10.206.193.4/api/wsapi.php?action=MakeCall&token=ew3QcS3Zq3&channel=SIP/TRUNK-ISABEL/\${numer}&ext=3014&contexto=aware_cola`)
+                        // fetch(`http://10.206.193.4/api/wsapi.php?action=MakeCall&token=123456&channel=SIP/TRUNK-ISABEL/\${numer}&ext=3014&contexto=aware_cola`)
                         }
 
                         </script>";
